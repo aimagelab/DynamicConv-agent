@@ -7,7 +7,7 @@ import torch
 import torch.optim as optim
 import numpy as np
 
-sys.path.append('/homes/flandi/cvpr2020')
+sys.path.append(os.getcwd())
 
 from tasks.R2R.Agents import get_agent
 from tasks.R2R.env import load_features
