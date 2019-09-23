@@ -24,7 +24,7 @@ def fill_joint_bilateral_filter(scan):
   # Load camera parameters
   intrinsics,_ = camera_parameters(scan)
   pano_ids = list(set([item.split('_')[0] for item in intrinsics.keys()]))
-  print 'Processing scan %s with %d panoramas' % (scan, len(pano_ids))
+  print('Processing scan %s with %d panoramas' % (scan, len(pano_ids)))
 
   for pano in pano_ids:
 

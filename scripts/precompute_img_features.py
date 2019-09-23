@@ -53,7 +53,7 @@ def load_viewpointids():
                 for item in data:
                     if item['included']:
                         viewpointIds.append((scan, item['image_id']))
-    print 'Loaded %d viewpoints' % len(viewpointIds)
+    print('Loaded %d viewpoints' % len(viewpointIds))
     return viewpointIds
 
 
@@ -134,9 +134,9 @@ def build_tsv():
             count += 1
             t_net.toc()
             if count % 100 == 0:
-                print 'Processed %d / %d viewpoints, %.1fs avg render time, %.1fs avg net time, projected %.1f hours' %\
+                print('Processed %d / %d viewpoints, %.1fs avg render time, %.1fs avg net time, projected %.1f hours' %\
                   (count,len(viewpointIds), t_render.average_time, t_net.average_time, 
-                  (t_render.average_time+t_net.average_time)*len(viewpointIds)/3600)
+                  (t_render.average_time+t_net.average_time)*len(viewpointIds)/3600))
 
 
 def read_tsv(infile):
@@ -158,5 +158,5 @@ if __name__ == "__main__":
 
     build_tsv()
     data = read_tsv(OUTFILE)
-    print 'Completed %d viewpoints' % len(data)
+    print('Completed %d viewpoints' % len(data))
 

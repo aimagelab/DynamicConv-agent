@@ -29,9 +29,9 @@ elevation = 0
 location = 0
 ANGLEDELTA = 5 * math.pi / 180
 
-print '\nPython Demo'
-print 'Use arrow keys to move the camera.'
-print 'Use number keys (not numpad) to move to nearby viewpoints indicated in the RGB view.\n'
+print('\nPython Demo')
+print('Use arrow keys to move the camera.')
+print('Use number keys (not numpad) to move to nearby viewpoints indicated in the RGB view.\n')
 
 while True:
     sim.makeAction([location], [heading], [elevation])
