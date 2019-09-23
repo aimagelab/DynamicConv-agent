@@ -2,7 +2,7 @@
 
 This is the PyTorch implementation for our paper:
 
-**Embodied Vision-and-Language Navigation with Dynamic Convolutional Filters**<br>
+[**Embodied Vision-and-Language Navigation with Dynamic Convolutional Filters**](https://bmvc2019.org/wp-content/uploads/papers/0384-paper.pdf)<br>
 __***Federico Landi***__, Lorenzo Baraldi, Massimiliano Corsini, Rita Cucchiara<br>
 British Machine Vision Conference (BMVC), 2019<br>
 **Oral Presentation**<br>
