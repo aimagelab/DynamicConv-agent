@@ -4,3 +4,4 @@
 [submodule "speaksee"]
 	path = speaksee
  	ulr = https://github.com/aimagelab/speaksee.git
+	url = https://github.com/aimagelab/speaksee.git
