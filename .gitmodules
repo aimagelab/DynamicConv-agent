@@ -2,5 +2,5 @@
 	path = pybind11
 	url = https://github.com/pybind/pybind11.git
 [submodule "speaksee"]
-  path = speaksee
-  ulr = https://github.com/aimagelab/speaksee.git
+	path = speaksee
+ 	ulr = https://github.com/aimagelab/speaksee.git
