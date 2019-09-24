@@ -18,6 +18,7 @@ class Trainer:
 
     def _train_epoch(self, agent, optimizer, num_iter):
         epoch_loss = 0.
+        agent.train()
         self.env.reset_epoch()
 
         for it in range(num_iter):
@@ -36,7 +37,6 @@ class Trainer:
 
     def train(self, agent, optimizer, num_epoch, num_iter_epoch=None, patience=None, eval_every=None, judge=None):
         best_metric = 0.
-        agent.train()
 
         if num_iter_epoch is None:
             num_iter_epoch = len(self.env.data) // self.env.batch_size + 1
