@@ -107,6 +107,16 @@ python tasks/R2R/main.py --num_heads=4
 
 Results in our paper were obtained with version v0.1 of the Matterport3DSimulator. Due to this difference, results could vary from the one in the paper. Using different GPUs for training, as well as different random seeds, may also affect results.
 
+We provide the weights obtained with our training. To reproduce results from the paper, run:
+```
+python tasks/R2R/main.py --name=normal_data --num_heads=4 --eval_only
+```
+
+or:
+```
+python tasks/R2R/main.py --name=data_augmentation --num_heads=4 --eval_only
+```
+
 ## License
 
 The Matterport3D dataset, and data derived from it, is released under the [Matterport3D Terms of Use](http://dovahkiin.stanford.edu/matterport/public/MP_TOS.pdf). Our code is released under the MIT license.
