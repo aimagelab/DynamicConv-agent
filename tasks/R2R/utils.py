@@ -1,5 +1,4 @@
 """ Utils for io, language, connectivity graphs etc """
-
 import sys
 import json
 import numpy as np
