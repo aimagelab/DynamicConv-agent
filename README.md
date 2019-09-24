@@ -43,8 +43,10 @@ git submodule update --init --recursive
 
 Python 3.6 is required to run our code. You can install the other modules via:
 ```
-pip install -t requirements.txt
-```
+pip install -r requirements.txt
+cd speaksee
+pip install -e .
+``` 
 
 ### Building with Docker
 
@@ -100,6 +102,10 @@ The number of dynamic filters can be set with the `--num_heads` parameter:
 ```
 python tasks/R2R/main.py --num_heads=4
 ```
+
+## Reproducibility Note
+
+Results in our paper were obtained with version v0.1 of the Matterport3DSimulator. Due to this difference, results could vary from the one in the paper. Using different GPUs for training, as well as different random seeds, may also affect results.
 
 ## License
 
