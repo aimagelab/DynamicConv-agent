@@ -27,10 +27,10 @@ If you use our code for your research, please cite our paper (BMVC 2019 oral):
 
 ### Clone Repo
 
-Clone the Matterport3DSimulator repository:
+Clone the repository:
 ```
 # Make sure to clone with --recursive
-git clone --recursive https://github.com/peteanderson80/Matterport3DSimulator.git
+git clone --recursive https://github.com/fdlandi/DynamicConv-agent.git
 cd DynamicConv-agent
 ```
 
@@ -80,7 +80,7 @@ cd ../
 
 If you use a conda environment for your experiments, you should specify the python path in the cmake options:
 ```
-cmake -DEGL_RENDERING=ON -DPYTHON_EXECUTABLE:FILEPATH='path to your python' ..
+cmake -DEGL_RENDERING=ON -DPYTHON_EXECUTABLE:FILEPATH='path_to_your_python_bin' ..
 ```
 
 ### Precomputing ResNet Image Features
