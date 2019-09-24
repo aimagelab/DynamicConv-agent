@@ -1,4 +1,4 @@
-torchvision==0.4.0a0+6b959ee
+torchvision==0.4.0
 requests==2.22.0
 h5py==2.9.0
 six==1.12.0
