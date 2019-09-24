@@ -1,7 +1,7 @@
 
 import os
 
-from tasks.R2R.env import env_list
+from tasks.R2R.env import LowLevelR2RBatch
 from tasks.R2R.utils import check_config_trainer, print_progress
 
 
@@ -9,12 +9,12 @@ class Trainer:
     def __init__(self, config):
         self.results = dict()
         self.config = check_config_trainer(config)
-        self.env = env_list[config['action_space']](features=config['features'],
-                                                    img_spec=config['img_spec'],
-                                                    batch_size=config['batch_size'],
-                                                    seed=config['seed'],
-                                                    splits=config['splits']
-                                                    )
+        self.env = LowLevelR2RBatch(features=config['features'],
+                                    img_spec=config['img_spec'],
+                                    batch_size=config['batch_size'],
+                                    seed=config['seed'],
+                                    splits=config['splits']
+                                    )
         print('Success!')
 
     def _train_epoch(self, agent, optimizer, num_iter):

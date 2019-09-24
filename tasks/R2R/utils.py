@@ -75,20 +75,18 @@ def print_progress(iteration, total, prefix='', suffix='', decimals=1, bar_lengt
 
 
 def check_config_trainer(config):
-    field_list = ['action_space', 'features', 'img_spec', 'splits', 'batch_size', 'seed', 'results_path']
+    field_list = ['features', 'img_spec', 'splits', 'batch_size', 'seed', 'results_path']
     assert isinstance(config, dict), 'expected type dict for argument config, found %s' % type(config)
     for field in field_list:
         assert field in config, 'missing required field in config: %s' % field
-    assert config['action_space'] in ['low', 'high'], 'action space should be either "low" or "high", found %s' % config['action_space']
     return config
 
 
 def check_config_judge(config):
-    field_list = ['action_space', 'features', 'img_spec', 'splits', 'batch_size', 'seed', 'results_path']
+    field_list = ['features', 'img_spec', 'splits', 'batch_size', 'seed', 'results_path']
     assert isinstance(config, dict), 'expected type dict for argument config, found %s' % type(config)
     for field in field_list:
         assert field in config, 'missing required field in config: %s' % field
-    assert config['action_space'] in ['low', 'high'], 'action space should be either "low" or "high", found %s' % config['action_space']
 
     if isinstance(config['splits'], str):
         config['splits'] = [config['splits']]

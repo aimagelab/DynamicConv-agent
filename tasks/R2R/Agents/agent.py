@@ -31,17 +31,8 @@ class R2RAgent:
     def get_config(self):
         return self.config
 
-    def high_level_rollout(self, env):
-        raise NotImplementedError
-
-    def low_level_rollout(self, env):
-        raise NotImplementedError
-
     def rollout(self, env):
-        if self.config['action_space'] == 'low':
-            return self.low_level_rollout(env)
-        else:
-            return self.high_level_rollout(env)
+        raise NotImplementedError
 
     def train(self):
         """ Should call Module.train() on each torch.nn.Module, if present """
@@ -57,38 +48,7 @@ class Oracle(R2RAgent):
         super(Oracle, self).__init__(config)
         self.name = 'Oracle'
 
-    def high_level_rollout(self, env):
-        obs = env.reset()
-        traj = [{
-            'instr_id': ob['instr_id'],
-            'path': [(ob['viewpoint'], ob['heading'], ob['elevation'])]
-        } for ob in obs]
-        ended = np.array([False] * len(obs))
-
-        while True:
-            scan_ids, next_viewpoints, next_headings, actions_idx = [], [], [], []
-
-            for ob in obs:
-                gt_viewpoint = ob['gt_viewpoint_idx'][0]
-                scan_ids.append(ob['scan'])
-                next_viewpoints.append(gt_viewpoint)
-                next_headings.append(ob['navigableLocations'][gt_viewpoint]['heading'])
-                actions_idx.append(list(ob['navigableLocations'].keys()).index(gt_viewpoint))
-
-            actions = [scan_ids, next_viewpoints, next_headings]
-            obs = env.step(actions)
-            for i, a in enumerate(actions_idx):
-                if a == 0:
-                    ended[i] = True
-            for i, ob in enumerate(obs):
-                if not ended[i]:
-                    traj[i]['path'].append((ob['viewpoint'], ob['heading'], ob['elevation']))
-            if ended.all():
-                break
-
-        return traj
-
-    def low_level_rollout(self, env):
+    def rollout(self, env):
         obs = env.reset()
         traj = [{
             'instr_id': ob['instr_id'],
@@ -116,15 +76,7 @@ class Stop(R2RAgent):
         super(Stop, self).__init__(config)
         self.name = 'Stop'
 
-    def high_level_rollout(self, env):
-        obs = env.reset()
-        traj = [{
-            'instr_id': ob['instr_id'],
-            'path': [(ob['viewpoint'], ob['heading'], ob['elevation'])]
-        } for ob in obs]
-        return traj
-
-    def low_level_rollout(self, env):
+    def rollout(self, env):
         obs = env.reset()
         traj = [{
             'instr_id': ob['instr_id'],
@@ -138,41 +90,7 @@ class Random(R2RAgent):
         super(Random, self).__init__(config)
         self.name = 'Random'
 
-    def high_level_rollout(self, env):
-        obs = env.reset()
-        traj = [{
-            'instr_id': ob['instr_id'],
-            'path': [(ob['viewpoint'], ob['heading'], ob['elevation'])]
-        } for ob in obs]
-        ended = np.array([False] * len(obs))
-
-        for t in range(20):
-            scan_ids, next_viewpoints, next_headings, actions_idx = [], [], [], []
-
-            for ob in obs:
-                next_action_idx = np.random.randint(0, len(ob['navigableLocations']))
-                next_viewpoint = list(ob['navigableLocations'].keys())[next_action_idx]
-
-                scan_ids.append(ob['scan'])
-                next_viewpoints.append(next_viewpoint)
-                next_headings.append(ob['navigableLocations'][next_viewpoint]['heading'])
-                actions_idx.append(next_action_idx)
-
-            actions = [scan_ids, next_viewpoints, next_headings]
-            obs = env.step(actions)
-
-            for i, a in enumerate(actions):
-                if a == 0:
-                    ended[i] = True
-            for i, ob in enumerate(obs):
-                if not ended[i]:
-                    traj[i]['path'].append((ob['viewpoint'], ob['heading'], ob['elevation']))
-            if ended.all():
-                break
-
-        return traj
-
-    def low_level_rollout(self, env):
+    def rollout(self, env):
         obs = env.reset()
         traj = [{
             'instr_id': ob['instr_id'],
@@ -284,10 +202,7 @@ class Dynamic(R2RAgent):
     def get_trainable_params(self):
         return list(self.encoder.parameters()) + list(self.policy.parameters())
 
-    def high_level_rollout(self, env):
-        assert False, "Trying to execute rollout with Dynamic agent in high-level action space! This agent only operates in low-level action space"
-
-    def low_level_rollout(self, env):
+    def rollout(self, env):
 
         assert self.mode is not None, "This agent contains trainable modules! Please call either agent.train() or agent.eval() before rollout"
         assert self.mode in ['train', 'eval'], "Agent.mode expected to be in ['train', 'eval'], found %s" % self.mode

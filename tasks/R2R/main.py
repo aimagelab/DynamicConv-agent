@@ -56,18 +56,17 @@ print('Running on device: {}'.format(device))
 
 def main(opts):
 
-    space = 'low'
     splits = 'train'
     results_path = os.path.join(opts.results_dir, opts.name)
     features, img_spec = load_features(opts.feature_store)
 
-    agent_config = {'action_space': space,
+    agent_config = {
                     'max_episode_len': opts.max_episode_len,
                     'num_heads': opts.num_heads,
                     'device': device,
                     }
 
-    trainer_config = {'action_space': space,
+    trainer_config = {
                       'features': features,
                       'img_spec': img_spec,
                       'splits': splits,
@@ -76,7 +75,7 @@ def main(opts):
                       'results_path': results_path,
                       }
 
-    judge_config = {'action_space': space,
+    judge_config = {
                     'features': features,
                     'img_spec': img_spec,
                     'splits': ['val_seen', 'val_unseen'],
