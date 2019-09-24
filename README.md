@@ -25,9 +25,6 @@ If you use our code for your research, please cite our paper (BMVC 2019 oral):
 
 ## Installation
 
-Please follow the instructions on the [Matterport3DSimulator](https://github.com/peteanderson80/Matterport3DSimulator) to install the simulator.
-
-
 ### Clone Repo
 
 Clone the Matterport3DSimulator repository:
@@ -47,6 +44,43 @@ git submodule update --init --recursive
 Python 3.6 is required to run our code. You can install the other modules via:
 ```
 pip install -t requirements.txt
+```
+
+### Building with Docker
+
+Please follow the instructions on the [Matterport3DSimulator](https://github.com/peteanderson80/Matterport3DSimulator) to install the simulator via Docker.
+
+### Bulding without Docker
+
+The simulator can be built outside of a docker container using the cmake build commands described above. However, this is not the recommended approach, as all dependencies will need to be installed locally and may conflict with existing libraries. The main requirements are:
+- Ubuntu >= 14.04
+- Nvidia-driver with CUDA installed 
+- C++ compiler with C++11 support
+- [CMake](https://cmake.org/) >= 3.10
+- [OpenCV](http://opencv.org/) >= 2.4 including 3.x
+- [OpenGL](https://www.opengl.org/)
+- [GLM](https://glm.g-truc.net/0.9.8/index.html)
+- [Numpy](http://www.numpy.org/)
+
+Optional dependences (depending on the cmake rendering options):
+- [OSMesa](https://www.mesa3d.org/osmesa.html) for OSMesa backend support
+- [epoxy](https://github.com/anholt/libepoxy) for EGL backend support
+
+### Build and Test
+
+Build the simulator and run the unit tests:
+```
+cd DynamicConv-agent
+mkdir build && cd build
+cmake -DEGL_RENDERING=ON ..
+make
+cd ../
+./build/tests ~Timing
+```
+
+If you use a conda environment for your experiments, you should specify the python path in the cmake options:
+```
+cmake -DEGL_RENDERING=ON -DPYTHON_EXECUTABLE:FILEPATH='path to your python' ..
 ```
 
 ### Precomputing ResNet Image Features
