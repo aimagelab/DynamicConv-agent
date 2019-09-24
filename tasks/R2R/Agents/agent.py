@@ -174,8 +174,23 @@ class Dynamic(R2RAgent):
         torch.save(self.policy.state_dict(), policy_path)
 
     def load(self, encoder_path, policy_path):
-        self.encoder.load_state_dict(torch.load(encoder_path))
-        self.policy.load_state_dict(torch.load(policy_path))
+        pretrained_dict_encoder = torch.load(encoder_path)
+        pretrained_dict_decoder = torch.load(policy_path)
+
+        encoder_dict = self.encoder.state_dict()
+        decoder_dict = self.policy.state_dict()
+
+        # 1. filter out unnecessary keys
+        pretrained_dict_encoder = {k: v for k, v in pretrained_dict_encoder.items() if k in encoder_dict}
+        pretrained_dict_decoder = {k: v for k, v in pretrained_dict_decoder.items() if k in decoder_dict}
+
+        # 2. overwrite entries in the existing state dict
+        encoder_dict.update(pretrained_dict_encoder)
+        decoder_dict.update(pretrained_dict_decoder)
+
+        # 3. load the new state dict
+        self.encoder.load_state_dict(pretrained_dict_encoder)
+        self.policy.load_state_dict(pretrained_dict_decoder)
 
     def _get_targets_and_features(self, obs):
         target_actions = []
