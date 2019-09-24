@@ -43,9 +43,10 @@ git submodule update --init --recursive
 
 Python 3.6 is required to run our code. You can install the other modules via:
 ```
-pip install -r requirements.txt
 cd speaksee
 pip install -e .
+cd ..
+pip install -r requirements.txt
 ``` 
 
 ### Building with Docker
