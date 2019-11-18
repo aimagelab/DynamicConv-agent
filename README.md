@@ -18,7 +18,7 @@ If you use our code for your research, please cite our paper (BMVC 2019 oral):
 @inproceedings{landi2019embodied,
       title={Embodied Vision-and-Language Navigation with Dynamic Convolutional Filters},
       author={Landi, Federico and Baraldi, Lorenzo and Corsini, Massimiliano and Cucchiara, Rita},
-      booktitle={30th British Machine Vision Conference},
+      booktitle={Proceedings of the British Machine Vision Conference},
       year={2019}
     }
 ```
